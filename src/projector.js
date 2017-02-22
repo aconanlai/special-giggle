@@ -1,0 +1,1 @@
+const hua = () => console.log('hua');
