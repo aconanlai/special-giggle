@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack"
+    "start": "webpack -w & nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,8 +24,11 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "async": "^2.1.5",
     "es6-promise": "^4.0.5",
     "exports-loader": "^0.6.3",
+    "express": "^4.14.1",
+    "google-sheets-node-api": "^0.3.0",
     "imports-loader": "^0.7.0",
     "whatwg-fetch": "^2.0.1"
   }
