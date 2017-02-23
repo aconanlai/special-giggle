@@ -1,7 +1,11 @@
 const express = require('express');
+const path = require('path');
 const GoogleSpreadsheet = require('google-sheets-node-api');
+const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json({ extended: true }));
+app.use('/', express.static(__dirname + '/build'));
 
 const creds = require('./credentials.json');
 
@@ -13,10 +17,18 @@ app.get('/msgs', (req, res) => {
   workSheet.getRows().then(rows => res.send(rows));
 });
 
-app.get('/msg', (req, res) => {
-  workSheet.addRow({ date: 'deez', message: 'nuts' })
-    .then(success => res.send('success'))
+app.post('/msg', (req, res) => {
+  workSheet.addRow({ date: new Date(), message: req.body.text })
+    .then(success => res.json('success'))
     .catch(err => console.log(err));
+});
+
+app.get('/projector', (req, res) => {
+  res.sendFile(path.join(__dirname + '/build/projector.html'));
+});
+
+app.get('/input', (req, res) => {
+  res.sendFile(path.join(__dirname + '/build/input.html'));
 });
 
 mySheet.useServiceAccountAuth(creds).then(mySheet.getSpreadsheet.bind(mySheet)).then((sheet_info) => {
