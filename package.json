@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -w & nodemon index.js"
+    "start": "webpack -w & nodemon index.js",
+    "build": "babel index.js --out-file indexv4.js & webpack"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,7 @@
   },
   "dependencies": {
     "async": "^2.1.5",
+    "babel-cli": "^6.23.0",
     "body-parser": "^1.16.1",
     "es6-promise": "^4.0.5",
     "exports-loader": "^0.6.3",

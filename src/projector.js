@@ -14,6 +14,34 @@ const fetchMsgs = () => {
   );
 };
 
+// create DOM element - div with text
+const makeElem = (msg) => {
+  const elem = document.createElement('div');
+  elem.className += 'msg';
+  const text = document.createTextNode(msg);
+  elem.appendChild(text);
+  const target = document.getElementById('msgs');
+  const first = target.firstChild;
+  target.insertBefore(elem, first);
+  elem.className += ' fade';
+};
+
+const placeElems = () => {
+  const maxdisplay = 10;
+  const shuffled = state.msgs.sort(() => 0.5 - Math.random());
+  const selected = (shuffled.length > maxdisplay) ? shuffled.slice(0, maxdisplay) : shuffled;
+
+  const msgs = document.querySelectorAll('.msg');
+  for (let i = 0; i < msgs.length; i += 1) {
+    msgs[i].className += ' fadeaway';
+  }
+  setTimeout(() => {
+    const target = document.getElementById('msgs');
+    target.innerHTML = '';
+    selected.map(msg => makeElem(msg));
+  }, 1000);
+};
+
 // fetch messages, extract text from response
 // update state if there are new msgs
 const processNewMsgs = () => {
@@ -22,7 +50,7 @@ const processNewMsgs = () => {
       const msgs = res.map(msg => msg.message);
       if (state.msgs.length !== msgs.length) {
         state.msgs = msgs;
-        console.log('it changed');
+        placeElems();
       }
     })
   );
@@ -34,4 +62,4 @@ processNewMsgs();
 // then repeat every x seconds
 setInterval(() => {
   processNewMsgs();
-}, 1000);
+}, 5000);
