@@ -39,5 +39,6 @@ app.get('/input', function (req, res) {
 
 mySheet.useServiceAccountAuth(creds).then(mySheet.getSpreadsheet.bind(mySheet)).then(function (sheet_info) {
   workSheet = sheet_info.worksheets[0];
+  console.log('working hello')
   app.listen(3000);
 });

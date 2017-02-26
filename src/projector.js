@@ -27,9 +27,8 @@ const makeElem = (msg) => {
 };
 
 const placeElems = () => {
-  const maxdisplay = 10;
   const shuffled = state.msgs.sort(() => 0.5 - Math.random());
-  const selected = (shuffled.length > maxdisplay) ? shuffled.slice(0, maxdisplay) : shuffled;
+  const selected = shuffled[0];
 
   const msgs = document.querySelectorAll('.msg');
   for (let i = 0; i < msgs.length; i += 1) {
@@ -38,7 +37,7 @@ const placeElems = () => {
   setTimeout(() => {
     const target = document.getElementById('msgs');
     target.innerHTML = '';
-    selected.map(msg => makeElem(msg));
+    makeElem(selected);
   }, 1000);
 };
 
