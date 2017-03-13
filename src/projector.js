@@ -47,10 +47,8 @@ const processNewMsgs = () => {
   return (
     fetchMsgs().then((res) => {
       const msgs = res.map(msg => msg.message);
-      if (state.msgs.length !== msgs.length) {
-        state.msgs = msgs;
-        placeElems();
-      }
+      state.msgs = msgs;
+      placeElems();
     })
   );
 };
@@ -61,4 +59,4 @@ processNewMsgs();
 // then repeat every x seconds
 setInterval(() => {
   processNewMsgs();
-}, 5000);
+}, 10000);
